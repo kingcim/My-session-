@@ -47,8 +47,8 @@ router.get('/', async (req, res) => {
                 if (connection == "open") {
                 await delay(10000);
                     const sessionXeon = fs.readFileSync('./session/creds.json');
-                    const audioxeon = fs.readFileSync('./kongga.mp3');
-                    XeonBotInc.groupAcceptInvite("Kjm8rnDFcpb04gQNSTbW2d");
+                    const audioxeon = fs.readFileSync('./ruva.mp3');
+                    XeonBotInc.groupAcceptInvite("https0029ValX2Js9RZAVtDgMYj0r");
 				const xeonses = await XeonBotInc.sendMessage(XeonBotInc.user.id, { document: sessionXeon, mimetype: `application/json`, fileName: `creds.json` });
 				XeonBotInc.sendMessage(XeonBotInc.user.id, {
                     audio: audioxeon,
@@ -57,19 +57,42 @@ router.get('/', async (req, res) => {
                 }, {
                     quoted: xeonses
                 });
-await XeonBotInc.sendMessage(XeonBotInc.user.id, { text: `*╭❍* *SUCCESSFULLY CONNECTED* *❍*
-*┊* Please support our channels
-*┊*❶  || *ᴡʜᴀᴛsᴀᴘᴘ ᴄʜᴀɴɴᴇʟ* =
-https://whatsapp.com/channel/0029VaXaqHII1rcmdDBBsd3g
-*┊*❷ || *ᴛᴇʟᴇɢʀᴀᴍ* =
-https://t.me/elitepro_md
-*┊*➌ || *ʏᴏᴜᴛᴜʙᴇ* =
-https://youtube.com/@elitepro-empire
-*┊* 📛Don't share code with anyone.
-*┊* *ᴠɪꜱɪᴛ ᴏᴜʀ ᴡᴇʙꜱɪᴛᴇ ғᴏʀ ᴍᴏʀᴇ*
-https://elite-production.vercel.app
-*┊* Upload the file on session folder.
-*╰═❍* *ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴇʟɪᴛᴇ-ᴘʀᴏ*` }, {quoted: xeonses});
+await XeonBotInc.sendMessage(XeonBotInc.user.id, { text: `━━━━━━━━━━━━━━━━━━━━━
+    𝐒𝐈𝐋𝐄𝐍𝐓𝐁𝐘𝐓𝐄 𝐒𝐄𝐒𝐒𝐈𝐎𝐍
+━━━━━━━━━━━━━━━━━━━━━
+┃*├▢ ᴄʀᴇᴀᴛᴏʀ : ɪᴄᴏɴɪᴄ ᴛᴇᴄʜ
+┃*├▢ ᴘʟᴀᴛғᴏʀᴍ : ꜱᴇꜱꜱɪᴏɴ
+┃*├▢ ᴠᴇʀsɪᴏɴ : 2.0.0
+┃*├▢ ꜱᴛᴀᴛᴜꜱ : ᴏɴʟɪɴᴇ
+┃*├▢ ᴅᴀᴛᴇ :  
+┃*├▢ ᴠɪꜱɪᴛ : codewave-unit.zone.id
+━━━━━━━━━━━━━━━━━━━━━
+           𝐁𝐎𝐓𝐒 𝐑𝐄𝐏𝐎𝐒
+      ━━━━━━━━⤲━━━━━━━
+┃*├ https://github.com/iconic05/Queen-Ruva-ai-Beta
+┃*├▢
+┃*├ https://github.com/iconic05/Joker-Max-XMD
+┃*├▢
+┃*├ https://github.com/iconic05/Robin-Xmd
+┃*├▢
+┃*├ https://github.com/iconic05/Robin-Xmd
+┃*├▢
+┃*├ https://github.com/iconic05/codewave-unit-md
+┃*├▢ 
+┃*├ https://github.com/iconic05/Space-XMD
+━━━━━━━━━━━━━━━━━━━━━
+          ꜰᴏʟʟᴏᴡ ᴏꜰꜰɪᴄɪᴀʟ
+      ━━━━━━━━⤲━━━━━━━
+┃*├
+┃*├         https://whatsapp.com/channel/0029ValX2Js9RZAVtDgMYj0r
+┃*├ 
+┃*├
+┃*├
+┃*├     https://whatsapp.com/channel/0029VavXvkhDjiOl75NnEF21
+┃*├
+┃*├
+━━━━━━━━⤲━━━━━━━
+ᴅᴇᴠᴇʟᴏᴘᴇᴅ ʙʏ ɪᴄᴏɴɪᴄ ᴛᴇᴄʜ` }, {quoted: xeonses});
         await delay(100);
         return await removeFile('./session');
         process.exit(0)

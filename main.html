@@ -1,176 +1,617 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-  <meta charset="UTF-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style>
-
-    body {
-
-      display: flex;
-
-      flex-direction: column; /* Stack items vertically */
-
-      align-items: center;
-
-      justify-content: center;
-
-      height: 100vh;
-
-      margin: 0;
-
-      background-image: url("https://i.ibb.co/jkps9WbS/20250214-213733.jpg"); /* Set the background image */
-
-      background-repeat: no-repeat;
-
-      background-position: center;
-
-      background-size: cover;
-
-    }
-
-
-
-    .btn {
-
-      --color: #FFC0CB;
-
-      --color2: rgb(10, 25, 30);
-
-      width: 200px; /* Set a fixed width for the buttons */
-
-      padding: 0.8em 1.75em;
-
-      background-color: transparent;
-
-      border-radius: 6px;
-
-      border: .3px solid var(--color);
-
-      transition: .5s;
-
-      position: relative;
-
-      overflow: hidden;
-
-      cursor: pointer;
-
-      z-index: 1;
-
-      font-weight: 300;
-
-      font-size: 17px;
-
-      font-family: 'Roboto', 'Segoe UI', sans-serif;
-
-      text-transform: uppercase;
-
-      color: var(--color);
-
-      margin-bottom: 10px; /* Add margin to separate buttons */
-
-    }
-
-
-
-    .btn::after, .btn::before {
-
-      content: '';
-
-      display: block;
-
-      height: 100%;
-
-      width: 100%;
-
-      transform: skew(90deg) translate(-50%, -50%);
-
-      position: absolute;
-
-      inset: 50%;
-
-      left: 25%;
-
-      z-index: -1;
-
-      transition: .5s ease-out;
-
-      background-color: var(--color);
-
-    }
-
-
-
-    .btn::before {
-
-      top: -50%;
-
-      left: -25%;
-
-      transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
-
-    }
-
-
-
-    .btn:hover::before {
-
-      transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
-
-    }
-
-
-
-    .btn:hover::after {
-
-      transform: skew(45deg) translate(-50%, -50%);
-
-    }
-
-
-
-    .btn:hover {
-
-      color: var(--color2);
-
-    }
-
-
-
-    .btn:active {
-
-      filter: brightness(.7);
-
-      transform: scale(.98);
-
-    }
-
-  </style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SilentByte Session | Iconic Tech</title>
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --success: #10b981;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --bg: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+        
+        .dark-mode {
+            --primary: #3b82f6;
+            --primary-light: #60a5fa;
+            --primary-dark: #2563eb;
+            --secondary: #94a3b8;
+            --success: #34d399;
+            --text: #e2e8f0;
+            --text-light: #cbd5e1;
+            --bg: #0f172a;
+            --bg-card: #1e293b;
+            --border: #334155;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-card);
+            box-shadow: var(--shadow);
+            color: var(--text);
+        }
+        
+        .theme-toggle:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(59, 130, 246, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        
+        .card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            gap: 0.5rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Follow Section */
+        .follow-section {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            margin-bottom: 3rem;
+            border: 1px solid var(--border);
+        }
+        
+        .follow-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+        
+        .follow-section p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .notification-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--success);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-logo {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <div class="logo-icon">SB</div>
+                <div class="logo-text">SilentByte Session</div>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </header>
+        
+        <!-- Hero Section -->
+        <section class="hero fade-in">
+            <h1>Advanced Session Management</h1>
+            <p>Secure, efficient, and professional session handling powered by Iconic Tech</p>
+        </section>
+        
+        <!-- Grid Layout -->
+        <div class="grid">
+            <div class="card fade-in delay-1">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                    </svg>
+                </div>
+                <h3>Pair Code</h3>
+                <p>Generate secure pairing codes for session authentication</p>
+                <button class="btn" onclick="handlePairCode()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+                    </svg>
+                    Generate Code
+                </button>
+            </div>
+            
+            <div class="card fade-in delay-2">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m2 7 10 10 10-10"/>
+                        <path d="M2 17h20"/>
+                    </svg>
+                </div>
+                <h3>Repository</h3>
+                <p>Access our Bots repository Dont forget to follow</p>
+                <button class="btn btn-outline" onclick="window.open('https://github.com/iconic05')">
+                    View Repository
+                </button>
+            </div>
+            
+            <div class="card fade-in delay-3">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 9a4 4 0 0 0-4-4 4.2 4.2 0 0 0-3 1.3A4.2 4.2 0 0 0 12 5a4.2 4.2 0 0 0-3-1.3A4.2 4.2 0 0 0 6 1.3 4 4 0 0 0 2 5v14a4 4 0 0 0 4 4h12a4 4 0 0 0 4-4Z"/>
+                        <path d="m9 13 3 3 6-6"/>
+                    </svg>
+                </div>
+                <h3>YouTube Channel</h3>
+                <p>Subscribe to our YouTube channel for tutorials and updates</p>
+                <button class="btn btn-outline" onclick="window.open('https://youtube.com/@iconictechofficial')">
+                    Visit Channel
+                </button>
+            </div>
+            
+            <div class="card fade-in delay-4">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                </div>
+                <h3>WhatsApp Channel</h3>
+                <p>Join our WhatsApp channel for the latest news and updates</p>
+                <button class="btn" onclick="handleWhatsApp()">
+                    Join Channel
+                </button>
+            </div>
+            
+            <div class="card fade-in delay-5">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21.5 12.5c.5-2.5.5-5-.5-7.5s-4-5.5-7.5-5.5-6 3.5-7.5 5.5S2 10 2.5 12.5 3 18 4.5 20.5 8 26.5 12 26.5c4 0 6.5-3.5 7.5-6s1-5 .5-8z"/>
+                        <path d="M15.5 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+                    </svg>
+                </div>
+                <h3>Telegram</h3>
+                <p>Connect with us on Telegram for community discussions</p>
+                <button class="btn btn-outline" onclick="window.open('https://t.me/IconicTechincDev')">
+                    Join Telegram
+                </button>
+            </div>
+            
+            <div class="card fade-in delay-1">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h3>Official Website</h3>
+                <p>Visit our official website for complete information</p>
+                <button class="btn" onclick="handleWebsite()">
+                    Visit Website
+                </button>
+            </div>
+        </div>
+        
+        <!-- Follow Section -->
+        <section class="follow-section fade-in delay-2">
+            <h2>Stay Updated</h2>
+            <p>Enable notifications to receive important updates about SilentByte sessions and new features</p>
+            <button class="btn" onclick="handleFollow()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 3a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h14Z"/>
+                    <path d="M12 8v8"/>
+                    <path d="M8 12h8"/>
+                </svg>
+                Follow Updates
+            </button>
+            
+            <div class="notification-toggle">
+                <span>Enable notifications</span>
+                <label class="switch">
+                    <input type="checkbox" id="notifications">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="fade-in delay-3">
+            <p>POWERED BY <span class="footer-logo">ICONIC TECH</span> © 2025</p>
+        </footer>
+    </div>
 
-
-
-  <button onclick="window.open(`/pair`)" class="btn">pair code</button>
-
-  <button onclick="window.open(`https://repository-mu-mauve.vercel.app/`)" class="btn">Repository</button>
-
-  <button onclick="window.open(`https://youtube.com/@elite-pro-empire`)" class="btn">youtube</button>
-
-  <button onclick="window.open(`https://whatsapp.com/channel/0029VaXaqHII1rcmdDBBsd3g`)" class="btn">channel</button>
-
-  <button onclick="window.open(`https://t.me/elitepro_md`)" class="btn">telegram</button>
-
-
-
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or respect OS preference
+        if (localStorage.getItem('theme') === 'dark' || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme'))) {
+            body.classList.add('dark-mode');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+        });
+        
+        // SweetAlert2 functions
+        function handlePairCode() {
+            Swal.fire({
+                title: 'Generate Pair Code',
+                text: 'This will generate a new pairing code for session authentication',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#25D366',
+                confirmButtonText: 'Continue',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.open('pair.html');
+                }
+            });
+        }
+        
+        function handleWhatsApp() {
+            Swal.fire({
+                title: 'Join WhatsApp Channel',
+                text: 'You will be redirected to our WhatsApp channel',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#25D366',
+                confirmButtonText: 'Continue',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.open('https://whatsapp.com/channel/0029ValX2Js9RZAVtDgMYj0r');
+                }
+            });
+        }
+        
+        function handleWebsite() {
+            Swal.fire({
+                title: 'Official Website',
+                text: 'You will be redirected to our official website',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#2563eb',
+                confirmButtonText: 'Continue',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Placeholder for official website URL
+                    window.open('https://codewave-unit.zone.id');
+                }
+            });
+        }
+        
+        function handleFollow() {
+            Swal.fire({
+                title: 'Follow for Updates',
+                text: 'Would you like to receive notifications about updates and new features?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#10b981',
+                confirmButtonText: 'Yes, follow!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Thank You!',
+                        text: 'You will now receive important updates about SilentByte sessions',
+                        icon: 'success',
+                        confirmButtonColor: '#10b981'
+                    });
+                    
+                    // In a real implementation, this would set up push notifications
+                    document.getElementById('notifications').checked = true;
+                }
+            });
+        }
+        
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="https://whatsapp.com/channel/0029VavXvkhDjiOl75NnEF21"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add intersection observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all elements with fade-in class
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
-
 </html>
-

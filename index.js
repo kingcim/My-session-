@@ -15,5 +15,7 @@ res.sendFile(__path + '/main.html')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.listen(PORT, () => {
-    
+    console.log(`silentbyte session \n dev iconic tech\nServer running on http://localhost:` + PORT)
+})
+
 module.exports = app
